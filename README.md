@@ -7,6 +7,8 @@ The `spatial_analysis` function is a Python function that performs a spatial ana
 
 The function reads in the shapefiles, transforms them to the EPSG 4326 CRS, identifies which points in the `i` dataset are within the `At` polygon, creates a buffer around the `At` polygon based on a user-defined distance (`buffer`), identifies which points in the `i` dataset are within this buffer but outside of the `At` polygon, calculates the Euclidean distance between each point in the `i` dataset and the nearest border of the `At` polygon (positive if inside, negative if outside), and returns a geopandas dataframe with the updated `i` dataset.
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/polanco-jaime/geospatial_rd_analysis/blob/main/spatial_analysis_function.ipynb)
+
 ## Installation
 To use the `spatial_analysis` function, you will need to have Python and the following Python packages installed: geopandas, shutil, tempfile, os, zipfile, and glob.
 
@@ -21,7 +23,7 @@ To use the `spatial_analysis` function, you need to provide the function with th
 
 Here's an example of how to use the `spatial_analysis` function:
 
-### Running from local:"
+### Running from local or colab:"
 ```
 """Running from local:"""
 !pip install git+https://github.com/polanco-jaime/geospatial_rd_analysis.git
@@ -32,17 +34,7 @@ results =  spatial_analysis(At = path+"folder/at.zip", i= path+"path+"folder/i.z
 
 ```
 
-### Running from cloab:"
-```
-"""Running from cloab:"""
-import spatial_analysis
-
-At_path = "path/to/At_shapefile.zip"
-i_path = "path/to/i_shapefile.zip"
-buffer = 100 # buffer distance in meters
-
-results = spatial_analysis.spatial_analysis(At_path, i_path, buffer)
-```
+ 
 
 The `results` variable will contain a geopandas dataframe with the updated `i` dataset, including a new column called "distance_to_At" that contains the Euclidean distances between each point in the `i` dataset and the nearest border of the `At` polygon (positive if inside, negative if outside).
 
