@@ -1,3 +1,4 @@
+README.md
 setup.py
 geospatial_rd_analysis/__init__.py
 geospatial_rd_analysis/rd_distance.py

@@ -21,7 +21,20 @@ To use the `spatial_analysis` function, you need to provide the function with th
 
 Here's an example of how to use the `spatial_analysis` function:
 
+### Running from local:"
 ```
+"""Running from local:"""
+!pip install git+https://github.com/polanco-jaime/geospatial_rd_analysis.git
+from geospatial_rd_analysis.rd_distance import *
+
+path = './path/'
+results =  spatial_analysis(At = path+"folder/at.zip", i= path+"path+"folder/i.zip", buffer=10000)
+
+```
+
+### Running from cloab:"
+```
+"""Running from cloab:"""
 import spatial_analysis
 
 At_path = "path/to/At_shapefile.zip"
