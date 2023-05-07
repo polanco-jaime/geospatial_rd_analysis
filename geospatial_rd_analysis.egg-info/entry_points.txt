@@ -1,0 +1,3 @@
+[console_scripts]
+my_function = geospatial_rd_analysis.rd_distance:spatial_analysis
+
