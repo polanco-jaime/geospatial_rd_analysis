@@ -19,8 +19,8 @@ def spatial_analysis(At, i, buffer):
     i_files = glob.glob(os.path.join(i_temp_dir, "*.shp"))
     
     # Read the shapefiles and transform to EPSG 3857
-    At_gdf = gpd.read_file(os.path.join(At_temp_dir, At_files[0])).to_crs("EPSG:4326")
-    i_gdf = gpd.read_file(os.path.join(i_temp_dir, i_files[0])).to_crs("EPSG:4326")
+    At_gdf = gpd.read_file(os.path.join(At_temp_dir, At_files[0])).to_crs("EPSG:3857")
+    i_gdf = gpd.read_file(os.path.join(i_temp_dir, i_files[0])).to_crs("EPSG:3857")
     
     # Identify which observations of 'i' are in 'At'
     i_within = i_gdf.within(At_gdf.unary_union)
