@@ -38,11 +38,11 @@ def spatial_analysis(At, i, buffer):
             # If the observation is inside 'At', the distance is positive
             distances.append(At_gdf.distance(row.geometry).min())
         elif i_within_buffer[index]:
-            # If the observation is outside 'At' but inside the buffer, the distance is 0
-            distances.append(0)
+            # If the observation is outside 'At' but inside the buffer, the distance is negative  
+            distances.append(-At_gdf.distance(row.geometry).min()) 
         else:
-            # If the observation is outside the buffer, the distance is negative
-            distances.append(-At_gdf.distance(row.geometry).min())
+            # If the observation is outside the buffer, the distance is 0
+            distances.append(0)
     
     # Add the distances to the 'i' dataframe
     i_gdf["distance_to_At"] = distances
@@ -52,4 +52,4 @@ def spatial_analysis(At, i, buffer):
     shutil.rmtree(i_temp_dir)
     
     # Return the updated 'i' dataframe
-    return i_gdf
+    return [i_gdf, At_gdf, i_gdf]
