@@ -5,18 +5,28 @@ import os
 import zipfile
 import glob
 
+def unzip_files(zip_path, extract_path):
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        for member in zip_ref.namelist():
+            filename = os.path.basename(member)
+            if not filename:
+                continue
+            source = zip_ref.open(member)
+            target = open(os.path.join(extract_path, filename), 'wb')
+            with source, target:
+                shutil.copyfileobj(source, target)
+
 def spatial_analysis(At, i, buffer):
     # Create temporary directories
     At_temp_dir = tempfile.mkdtemp()
     i_temp_dir = tempfile.mkdtemp()
     
     # Extract the shapefiles to temporary directories
-    with zipfile.ZipFile(At, 'r') as zip_ref:
-        zip_ref.extractall(At_temp_dir)
+    unzip_files(At, At_temp_dir)
     At_files = glob.glob(os.path.join(At_temp_dir, "*.shp"))
-    
-    with zipfile.ZipFile(i, 'r') as zip_ref:
-        zip_ref.extractall(i_temp_dir)
+
+    # Extract the i shapefiles to temporary i directory
+    unzip_files(i, i_temp_dir)
     i_files = glob.glob(os.path.join(i_temp_dir, "*.shp"))
     
     # Read the shapefiles and transform to EPSG 3857
